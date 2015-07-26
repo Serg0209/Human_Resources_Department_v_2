@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+
+
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass">
+            <value>org.springframework.web.servlet.view.JstlView</value>
+        </property>
+        <property name="order" value="2"/>
+        <property name="prefix">
+            <value>/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+    </bean>
+
+    <bean id="professionController" class="students.web.controller.ProfessionController">
+        <property name="professionFacade" ref="professionFacade" />
+    </bean>
+
+    <bean id="subjectController" class="students.web.controller.SubjectController">
+        <property name="subjectFacade" ref="subjectFacade" />
+    </bean>
+
+    <bean id="applicantController" class="students.web.controller.ApplicantController">
+        <property name="applicantFacade" ref="applicantFacade" />
+    </bean>
+
+    <bean id="urlMapping" class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/profession.std">professionController</prop>
+                <prop key="/subject.std">subjectController</prop>
+                <prop key="/applicant.std">applicantController</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
